@@ -5,13 +5,21 @@ import {NavLink} from "react-router-dom";
 const BestFriend = (props) => {
     return (
         <div>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlrZqTCInyg6RfYC7Ape20o-EWP1EN_A8fOA&usqp=CAU"
-                 className={style.bestFriendPic} alt=""/>
+            <NavLink to={'/dialogs/' + props.id} className={style.item}>
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlrZqTCInyg6RfYC7Ape20o-EWP1EN_A8fOA&usqp=CAU"
+                    className={style.bestFriendPic}/>
+            </NavLink>
         </div>
     )
 }
 
 const Sidebar = (props) => {
+
+    let bestFriendElement = props.sidebarPage.bestFriends.map(friend => <BestFriend name={friend.name} id={friend.id}/>);
+
+    // let dialogsElement = props.dialogPage.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+
     return (
         <nav className={style.nav}>
             <div>
@@ -27,10 +35,10 @@ const Sidebar = (props) => {
                 <NavLink to='/music' className={style.item}>Music</NavLink>
             </div>
             <div>
-                <NavLink to='/settings' className={style.item}>Settings {props.bestFriends.name}</NavLink>
+                <NavLink to='/settings' className={style.item}>Settings</NavLink>
             </div>
             <div>
-                <BestFriend />
+                {bestFriendElement}
             </div>
         </nav>
     )

@@ -14,10 +14,17 @@ a:hover {
 a:active {
     color: red;
 }
-
 .bestFriendPic {
-    margin-top: 60px;
-    width: 60px;
-    height: 60px;
+    margin: 0;
+    width: 40px;
+    height: 40px;
     border-radius: 40px;
+    float: left;
+    padding-right: 5px;
+}
+.bestFriendPic:nth-child(1) {
+    margin-top: 20px;
+}
+.bestFriendName {
+    padding: 20px;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import Post from "./Post/Post";
 import style from "./MyPosts.module.css"
 
-const MyPosts = (props) => {
+const  MyPosts = (props) => {
     let postsElement = props.postsData.map(post => <Post message={post.message} likesCount={post.likesCount}/>)
 
     let newPostElement = React.createRef();
