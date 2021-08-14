@@ -1,25 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import Profile from "./Components/Profile/Profile";
+import Sidebar from "./Components/Sidebar/Sidebar";
+import Header from "./Components/Header/Header";
+import Dialogs from "./Components/Dialogs/Dialogs";
+import {BrowserRouter, Route} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = (props) => {
+
+    return (
+        <BrowserRouter>
+            <div className="app-wrapper">
+                <Header/>
+                <Sidebar bestFriends={props.state.sidebarPage}/>
+                <Route path="/dialogs" render={ () => <Dialogs dialogPage={props.state.dialogPage}/>}/>
+                <Route path="/profile" render={ () => <Profile profilePage={props.state.profilePage}
+                                                               addPost={props.addPost}
+                                                               updateNewPostText={props.updateNewPostText}/>}/>
+            </div>
+        </BrowserRouter>
+);
 }
 
 export default App;

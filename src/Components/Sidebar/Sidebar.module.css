@@ -1,0 +1,23 @@
+.nav {
+    grid-area: n;
+    background-color: orange;
+    padding: 20px;
+}
+
+.item {
+    text-decoration: none;
+    color: white;
+}
+a:hover {
+    color: blue;
+}
+a:active {
+    color: red;
+}
+
+.bestFriendPic {
+    margin-top: 60px;
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+}
