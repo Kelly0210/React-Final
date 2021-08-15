@@ -13,10 +13,12 @@ const App = (props) => {
             <div className="app-wrapper">
                 <Header/>
                 <Sidebar sidebarPage={props.state.sidebarPage}/>
-                <Route path="/dialogs" render={ () => <Dialogs dialogPage={props.state.dialogPage}/>}/>
+                <Route path="/dialogs" render={ () => <Dialogs dialogPage={props.state.dialogPage}
+                                                               dispatch={props.dispatch}
+                />}/>
                 <Route path="/profile" render={ () => <Profile profilePage={props.state.profilePage}
-                                                               addPost={props.addPost}
-                                                               updateNewPostText={props.updateNewPostText}/>}/>
+                                                               dispatch={props.dispatch}
+                />}/>
             </div>
         </BrowserRouter>
 );
