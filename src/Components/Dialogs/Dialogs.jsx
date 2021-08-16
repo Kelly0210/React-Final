@@ -1,24 +1,23 @@
 import React from 'react';
 import style from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
-import {sendMessageAC, updateNewMessageBodyAC} from "../../store/store";
 import MessageItem from "./DialogItem/MessageItem";
 
 const Dialogs = (props) => {
 
-    let messagesElement = props.dialogPage.messagesData.map(message => <MessageItem message={message.message}
-                                                                                    id={message.id}/>)
+    let messagesElement = props.messagesData.map(message => <MessageItem message={message.message}
+                                                                         id={message.id}/>)
 
-    let dialogsElement = props.dialogPage.dialogsData.map(dialog => <DialogItem name={dialog.name}
-                                                                                id={dialog.id}/>)
+    let dialogsElement = props.dialogsData.map(dialog => <DialogItem name={dialog.name}
+                                                                     id={dialog.id}/>)
 
     let onSendMessageClick = () => {
-        props.dispatch(sendMessageAC());
+        props.sendMessage();
     }
 
     let onMessageChange = (event) => {
         let body = event.target.value;
-        props.dispatch(updateNewMessageBodyAC(body));
+        props.onMessageChange(body);
     }
 
     return (
@@ -28,7 +27,7 @@ const Dialogs = (props) => {
             </div>
             <div className={style.messages}>
                 {messagesElement}
-                <textarea value={props.dialogPage.newMessageBody}
+                <textarea value={props.newMessageBody}
                           onChange={onMessageChange}
                           placeholder="Enter your message" />
                 <br/>

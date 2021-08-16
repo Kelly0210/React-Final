@@ -1,19 +1,18 @@
 import React from 'react';
 import Post from "./Post/Post";
 import style from "./MyPosts.module.css"
-import {addPostAC, updateNewPostAC} from "../../../store/store";
 
 const  MyPosts = (props) => {
 
     let postsElement = props.postsData.map(post => <Post message={post.message} likesCount={post.likesCount}/>)
 
     let addPost = () => {
-        props.dispatch(addPostAC());
+        props.addPost();
     }
 
     let onPostChange = (event) => {
         let text = event.target.value;
-        props.dispatch(updateNewPostAC(text));
+        props.updateNewPostText(text);
     }
     return (
         <div>

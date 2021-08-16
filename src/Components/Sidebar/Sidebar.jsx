@@ -3,6 +3,7 @@ import style from './Sidebar.module.css'
 import {NavLink} from "react-router-dom";
 
 const BestFriend = (props) => {
+
     return (
         <div>
             <NavLink to={'/dialogs/' + props.id} className={style.item}>
