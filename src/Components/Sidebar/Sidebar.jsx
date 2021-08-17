@@ -16,10 +16,8 @@ const BestFriend = (props) => {
 }
 
 const Sidebar = (props) => {
-
-    let bestFriendElement = props.sidebarPage.bestFriends.map(friend => <BestFriend name={friend.name} id={friend.id}/>);
-
-    // let dialogsElement = props.dialogPage.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
+debugger
+    let bestFriendElement = props.bestFriends.map(friend => <BestFriend name={friend.name} id={friend.id}/>);
 
     return (
         <nav className={style.nav}>

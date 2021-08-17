@@ -1,10 +1,10 @@
 import './App.css';
 import React from 'react';
 import Profile from "./Components/Profile/Profile";
-import Sidebar from "./Components/Sidebar/Sidebar";
 import Header from "./Components/Header/Header";
 import {BrowserRouter, Route} from "react-router-dom";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
+import SidebarContainer from "./Components/Sidebar/SidebarContainer";
 
 const App = (props) => {
 
@@ -12,11 +12,9 @@ const App = (props) => {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Sidebar sidebarPage={props.state.sidebarPage}/>
-                <Route path="/dialogs" render={ () => <DialogsContainer store={props.store}
-                />}/>
-                <Route path="/profile" render={ () => <Profile store={props.store}
-                />}/>
+                <SidebarContainer />
+                <Route path="/dialogs" render={ () => <DialogsContainer/>}/>
+                <Route path="/profile" render={ () => <Profile/>}/>
             </div>
         </BrowserRouter>
 );

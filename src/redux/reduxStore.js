@@ -11,4 +11,6 @@ let bunchOfReducers = combineReducers({
 
 let store = createStore(bunchOfReducers);
 
+window.store = store;
+
 export default store;
