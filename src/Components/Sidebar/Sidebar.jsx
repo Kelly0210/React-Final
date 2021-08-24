@@ -16,7 +16,7 @@ const BestFriend = (props) => {
 }
 
 const Sidebar = (props) => {
-debugger
+
     let bestFriendElement = props.bestFriends.map(friend => <BestFriend name={friend.name} id={friend.id}/>);
 
     return (
@@ -26,6 +26,9 @@ debugger
             </div>
             <div>
                 <NavLink to='/dialogs' className={style.item}>Messages</NavLink>
+            </div>
+            <div>
+                <NavLink to='/users' className={style.item}>Users</NavLink>
             </div>
             <div>
                 <NavLink to='/news' className={style.item}>News</NavLink>
