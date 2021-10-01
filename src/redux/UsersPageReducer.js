@@ -48,7 +48,8 @@ const UsersReducer = (state = initialState, action) => {
         }
         case IS_FETCHING:
             return {
-                ...state, isFetching: action.isFetching
+                ...state,
+                isFetching: action.isFetching
             }
         default:
             return state

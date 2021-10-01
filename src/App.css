@@ -1,9 +1,7 @@
-ul li {
-  list-style: square;
-}
 .app-wrapper {
-  width: 1200px;
+  width: 1400px;
   display: grid;
+  margin: 0 auto;
 
   grid-template-areas:
   "h h"
@@ -12,4 +10,9 @@ ul li {
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
 
+}
+
+.content {
+  grid-area: c;
+  background-color: lightblue;
 }

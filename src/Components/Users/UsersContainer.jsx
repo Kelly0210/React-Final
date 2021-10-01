@@ -16,7 +16,7 @@ class UsersAPIComponent extends React.Component {
         this.props.isFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?
         page=${this.props.currentPage}
-        &count=${this.props.pageSize}`)
+        &count=${this.props.pageSize}`, {withCredentials: true})
             .then(response => {
                 this.props.isFetching(false);
                 this.props.getUsers(response.data.items);
@@ -24,12 +24,12 @@ class UsersAPIComponent extends React.Component {
             });
     }
 
-    onPageChanged = (pageNumber) => {
+    onPageChanged = (page) => {
         this.props.isFetching(true);
-        this.props.setCurrentPage(pageNumber);
+        this.props.setCurrentPage(page);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?
-        page=${pageNumber}
-        &count=${this.props.pageSize}`)
+        page=${page}
+        &count=${this.props.pageSize}`, {withCredentials: true})
             .then(response => {
                 this.props.isFetching(false);
                 this.props.getUsers(response.data.items);
@@ -51,7 +51,6 @@ class UsersAPIComponent extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-
     return {
         usersData: state.usersPage.usersData,
         pageSize: state.usersPage.pageSize,
