@@ -22,7 +22,7 @@ const Sidebar = (props) => {
     return (
         <nav className={style.nav}>
             <div>
-                <NavLink to='/profile/:userID?' className={style.item}>Profile</NavLink>
+                <NavLink to='/profile/' className={style.item}>Profile</NavLink>
             </div>
             <div>
                 <NavLink to='/dialogs' className={style.item}>Messages</NavLink>

@@ -7,9 +7,10 @@ import {withRouter} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
+        debugger
         let userID = this.props.match.params.userID;
         if (!userID) {
-            userID = 10;
+            userID = 2;
         }
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
             .then(response => {
@@ -18,20 +19,21 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        return <Profile {...this.props} profile={this.props.profilePage.profile} props={this.props} addPost={this.props.addPost}/>
+        return <Profile {...this.props} profile={this.props.profile} addPost={this.props.addPost}/>
     }
 }
 
 let mapStateToProps = (state) => {
     return {
+        profile: state.profilePage.profile,
         profilePage: state.profilePage
     }
 };
 
-let withURLDataContainerComponent = withRouter(ProfileContainer);
+let WithURLDataContainerComponent = withRouter(ProfileContainer);
 
 export default connect(mapStateToProps, {
     setUserProfile,
     addPost,
     updateNewPostText,
-})(withURLDataContainerComponent)
+})(WithURLDataContainerComponent)

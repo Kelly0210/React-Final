@@ -29,7 +29,7 @@ const ProfilePageReducer = (state = initialState, action) => {
                 newPostText: action.newText
             }
         case SET_USER_PROFILE:
-        return {
+            return {
             ...state,
             profile: action.profile
         }
