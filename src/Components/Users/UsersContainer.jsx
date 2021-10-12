@@ -6,6 +6,7 @@ import {
 } from "../../redux/UsersPageReducer";
 import Users from "./Users";
 import Preloader from "../Common/preloader";
+import {Redirect} from "react-router-dom";
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
@@ -33,6 +34,8 @@ class UsersAPIComponent extends React.Component {
     }
 
     render() {
+        if (!this.props.isAuth) return <Redirect to={"/login"}/>
+
         return <>
             {this.props.isFetching ? <Preloader /> : null}
                 <Users totalUsersCount={this.props.totalUsersCount}
@@ -57,6 +60,8 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching,
         isFollowed: state.usersPage.isFollowed,
         followingInProgress: state.usersPage.followingInProgress,
+
+        isAuth: state.auth.isAuth
     }
 };
 
