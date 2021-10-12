@@ -9,7 +9,7 @@ function Users(props) {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
-
+debugger
     return (
         <div>
             <div>
@@ -30,38 +30,12 @@ function Users(props) {
                         className={style.userPic}
                         alt=""/>
                     </NavLink>
+
                         </div>
                             <div>
-                    {/*<button onClick={(event) => {*/}
-
-                    {/*     let serverFollow = () => {*/}
-                    {/*         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,*/}
-                    {/*             {},*/}
-                    {/*             {withCredentials: true, headers: {"API_KEY": "31cc17d5-5168-47dc-b946-ed736858adc1"}})*/}
-                    {/*             .then(response => {*/}
-                    {/*                 if (response.data.resultCode === 0) {*/}
-                    {/*                     props.toggleFollow(user.id)*/}
-                    {/*                 }*/}
-                    {/*             })};*/}
-
-                    {/*     let serverUnFollow = () => axios.post(`https://social-network.samuraijs.com/api/1.0/delete/${user.id}`,*/}
-                    {/*         {},*/}
-                    {/*         {withCredentials: true, headers: {"API_KEY": "31cc17d5-5168-47dc-b946-ed736858adc1"}})*/}
-                    {/*         .then(response => {*/}
-                    {/*             if (response.data.resultCode === 0) {*/}
-                    {/*                 props.toggleFollow(user.id)*/}
-                    {/*             }*/}
-                    {/*         });*/}
-
-                    {/*     if (user.isFollowed) {*/}
-                    {/*         return serverUnFollow();*/}
-                    {/*     } else if (user.isFollowed === false) {*/}
-                    {/*         return serverFollow();*/}
-                    {/*     }*/}
-
-                    {/* }}>*/}
-                    {/*     {user.isFollowed ? "unFollow" : "Follow"}*/}
-                    {/*</button>*/}
+                                <button disabled={props.followingInProgress}
+                                        onClick={() => {props.toggleFollow(user.id)}}>{props.isFollowed ? "unFollow" : "Follow"}
+                                </button>
                             </div>
             </span>
                     <span>
