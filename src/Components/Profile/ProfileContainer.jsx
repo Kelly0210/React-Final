@@ -1,8 +1,15 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {addPost, getUserProfileThunkCreator, updateNewPostText} from "../../redux/ProfilePageReducer";
+import {
+    addPost,
+    getUserProfileThunkCreator,
+    getUserStatusThunkCreator,
+    updateNewPostText
+} from "../../redux/ProfilePageReducer";
 import {Redirect, withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -11,11 +18,10 @@ class ProfileContainer extends React.Component {
             userID = 2;
         }
         this.props.getUserProfileThunkCreator(userID);
+        // this.props.getUserStatusThunkCreator(userID);
     }
 
-    render() {
-        if (!this.props.isAuth) return <Redirect to={"/login"}/>
-
+    render(){
         return <Profile {...this.props} profile={this.props.profile} addPost={this.props.addPost}/>
     }
 }
@@ -24,14 +30,16 @@ let mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
         profilePage: state.profilePage,
-        isAuth: state.auth.isAuth
     }
-};
+}
 
-let WithURLDataContainerComponent = withRouter(ProfileContainer);
-
-export default connect(mapStateToProps, {
-    addPost,
-    updateNewPostText,
-    getUserProfileThunkCreator
-})(WithURLDataContainerComponent)
+export default compose(
+    connect(mapStateToProps, {
+        addPost,
+        updateNewPostText,
+        getUserProfileThunkCreator,
+        getUserStatusThunkCreator
+        }),
+    withRouter,
+    // withAuthRedirect,
+)(ProfileContainer)

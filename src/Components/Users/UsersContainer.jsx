@@ -6,36 +6,20 @@ import {
 } from "../../redux/UsersPageReducer";
 import Users from "./Users";
 import Preloader from "../Common/preloader";
-import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
+
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
-        // this.props.toggleIsFetching(true);
-        //
-        // getUsersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-        //     .then(data => {
-        //         this.props.toggleIsFetching(false);
-        //         this.props.setUsers(data.items);
-        //         this.props.setTotalUsersCount(data.totalCount);
-        //     });
         this.props.getUsersThunkCreator();
     }
 
     onPageChanged = (pageNumber) => {
-        // this.props.toggleIsFetching(true);
-        // this.props.setCurrentPage(pageNumber);
-        //
-        // getUsersAPI.getUsers(pageNumber, this.props.pageSize)
-        //     .then(data => {
-        //         this.props.toggleIsFetching(false);
-        //         this.props.setUsers(data.items);
-        //     });
         this.props.getUsersThunkCreator();
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={"/login"}/>
-
         return <>
             {this.props.isFetching ? <Preloader /> : null}
                 <Users totalUsersCount={this.props.totalUsersCount}
@@ -60,16 +44,16 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching,
         isFollowed: state.usersPage.isFollowed,
         followingInProgress: state.usersPage.followingInProgress,
-
-        isAuth: state.auth.isAuth
     }
 };
 
-const UsersContainer = connect(mapStateToProps, {
-    toggleFollow,
-    setCurrentPage,
-    followingInProgress,
-    getUsersThunkCreator
-}) (UsersAPIComponent);
+export default compose(
+    connect(mapStateToProps, {
+        toggleFollow,
+        setCurrentPage,
+        followingInProgress,
+        getUsersThunkCreator
+    }),
+    withAuthRedirect
+)(UsersAPIComponent)
 
-export default UsersContainer;
