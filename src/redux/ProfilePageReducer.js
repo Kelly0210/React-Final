@@ -19,7 +19,7 @@ let initialState = {
 const ProfilePageReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
-            let newPost = action.postText;
+            let newPost = action.newPostBody;
             return {
                 ...state,
                 postsData: [...state.postsData, {id: 6, message: newPost, likesCount: 0}]
@@ -39,10 +39,10 @@ const ProfilePageReducer = (state = initialState, action) => {
     }
 };
 
-export const addPost = (postText) => {
+export const addPost = (newPostBody) => {
     return {
         type: ADD_POST,
-        postText
+        newPostBody
     }
 };
 

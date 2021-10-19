@@ -30,7 +30,7 @@ const DialogPageReducer = (state = initialState, action) => {
     }
 };
 
-export const sendMessageAC = (newMessageBody) => {
+export const sendMessage = (newMessageBody) => {
     return {
         type: SEND_MESSAGE,
         newMessageBody
