@@ -15,7 +15,8 @@ debugger
             {/*</div>*/}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large} alt=""/>
-                <ProfileStatus {...props}/>
+                <ProfileStatus profileStatus={props.profileStatus}
+                               updateStatus={props.updateProfileStatusThunkCreator}/>
             </div>
         </div>
     )

@@ -1,7 +1,6 @@
-import {userProfileAPI, userStatusAPI} from "../API/API";
+import {userProfileAPI, updateProfileStatusAPI, getProfileStatusAPI} from "../API/API";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_USER_STATUS = "SET_USER_STATUS";
 
@@ -13,7 +12,6 @@ let initialState = {
         {id: 4, message: "Yo", likesCount: 0},
         {id: 5, message: "Yo", likesCount: 0},
     ],
-    newPostText: "",
     profile: null,
     profileStatus: null
 };
@@ -21,21 +19,15 @@ let initialState = {
 const ProfilePageReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
-            let newPost = state.newPostText;
+            let newPost = action.postText;
             return {
                 ...state,
-                newPostText: '',
                 postsData: [...state.postsData, {id: 6, message: newPost, likesCount: 0}]
-            }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
             }
         case SET_USER_PROFILE:
             return {
-            ...state,
-            profile: action.profile
+                ...state,
+                profile: action.profile
             }
         case SET_USER_STATUS:
             return {
@@ -47,17 +39,13 @@ const ProfilePageReducer = (state = initialState, action) => {
     }
 };
 
-export const addPost = () => {
+export const addPost = (postText) => {
     return {
-        type: ADD_POST
+        type: ADD_POST,
+        postText
     }
 };
-export const updateNewPostText = (text) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: text,
-    }
-};
+
 export const setUserProfile = (profile) => {
     return {
         type: SET_USER_PROFILE,
@@ -65,7 +53,7 @@ export const setUserProfile = (profile) => {
     }
 }
 
-export const setUserStatus = (profileStatus) => {
+export const setProfileStatus = (profileStatus) => {
     return {
         type: SET_USER_STATUS,
         profileStatus
@@ -73,17 +61,26 @@ export const setUserStatus = (profileStatus) => {
     }
 }
 
-export const getUserProfileThunkCreator = (userID) => (dispatch) => {
+export const getProfileThunkCreator = (userID) => (dispatch) => {
     userProfileAPI(userID)
         .then(data => {
             dispatch(setUserProfile(data));
         })
 }
 
-export const getUserStatusThunkCreator = (userID) => (dispatch) => {
-    userStatusAPI(userID)
+export const getProfileStatusThunkCreator = (userID) => (dispatch) => {
+    getProfileStatusAPI(userID)
         .then(data => {
-            dispatch(setUserProfile(data));
+                dispatch(setProfileStatus(data));
+        })
+}
+
+export const updateProfileStatusThunkCreator = (status) => (dispatch) => {
+    updateProfileStatusAPI(status)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setProfileStatus(status));
+            }
         })
 }
 
