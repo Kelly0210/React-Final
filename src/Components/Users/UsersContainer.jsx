@@ -24,7 +24,7 @@ class UsersAPIComponent extends React.Component {
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.getUsersThunkCreator();
+        this.props.getUsersThunkCreator(pageNumber);
     }
 
     render() {
