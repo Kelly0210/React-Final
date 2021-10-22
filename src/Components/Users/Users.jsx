@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Users.module.css';
-import {NavLink, Redirect} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 function Users(props) {
 

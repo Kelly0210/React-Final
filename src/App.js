@@ -7,21 +7,36 @@ import SidebarContainer from "./Components/Sidebar/SidebarContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import LoginPage from "./Components/Login/Login";
+import {connect} from "react-redux";
+import {initializedApp} from "./redux/AppReducer";
+import Preloader from "./Components/Common/preloader";
 
-const App = () => {
+class App extends React.Component {
+    componentDidMount() {
+        this.props.initializedApp();
+    }
 
-    return (
-        <BrowserRouter>
+    render() {
+        if (!this.props.initialized) {
+            return <Preloader />
+        }
+
+        return <BrowserRouter>
             <div className="app-wrapper content">
-                <HeaderContainer />
-                <SidebarContainer />
-                <Route path="/dialogs" render={ () => <DialogsContainer />}/>
-                <Route path="/profile/:userID?" render={ () => <ProfileContainer />}/>
-                <Route path="/users" render={ () => <UsersContainer />}/>
-                <Route path="/login" render={ () => <LoginPage />}/>
-                </div>
+                <HeaderContainer/>
+                <SidebarContainer/>
+                <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                <Route path="/profile/:userID?" render={() => <ProfileContainer/>}/>
+                <Route path="/users" render={() => <UsersContainer/>}/>
+                <Route path="/login" render={() => <LoginPage/>}/>
+            </div>
         </BrowserRouter>
-);
+
+    }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+    initialized: state.app.initialized
+})
+
+export default connect(mapStateToProps, {initializedApp})(App)
