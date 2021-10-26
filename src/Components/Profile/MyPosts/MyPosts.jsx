@@ -7,7 +7,7 @@ import {CustomTextArea} from "../../../common/formControls";
 
 let maxLength30 = maxLengthCreator(30);
 
-const MyPosts = (props) => {
+const MyPosts = React.memo(props => {
 
     let postsElement = props.profilePage.postsData.map(post => <Post message={post.message}
                                                                      likesCount={post.likesCount}/>)
@@ -25,7 +25,7 @@ const MyPosts = (props) => {
             {postsElement}
         </div>
     </div>
-}
+});
 
 const PostsForm = (props) => {
     return <form onSubmit={props.handleSubmit}>

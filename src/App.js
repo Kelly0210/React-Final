@@ -31,7 +31,6 @@ class App extends React.Component {
                 <Route path="/login" render={() => <LoginPage/>}/>
             </div>
         </BrowserRouter>
-
     }
 }
 

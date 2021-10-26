@@ -26,8 +26,7 @@ export const userProfileAPI = (userID) => {
 }
 
 export const getProfileStatusAPI = (userID) => {
-    return instance.get(`profile/status/
-    ${userID}`)
+    return instance.get(`profile/status/${userID}`)
         .then(response => {
             return response.data
         });

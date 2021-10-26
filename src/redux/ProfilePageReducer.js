@@ -3,6 +3,7 @@ import {userProfileAPI, updateProfileStatusAPI, getProfileStatusAPI} from "../AP
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 const SET_USER_STATUS = "SET_USER_STATUS";
+const DELETE_POST = "DELETE_POST"
 
 let initialState = {
     postsData: [
@@ -23,6 +24,11 @@ const ProfilePageReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postsData: [...state.postsData, {id: 6, message: newPost, likesCount: 0}]
+            }
+        case DELETE_POST:
+            return {
+                ...state,
+                postsData: state.postsData.filter(post => post.id != action.postID)
             }
         case SET_USER_PROFILE:
             return {
@@ -60,6 +66,13 @@ export const setProfileStatus = (profileStatus) => {
 
     }
 }
+
+export const deletePost = (postID) => {
+    return {
+        type: DELETE_POST,
+        postID
+    }
+};
 
 export const getProfileThunkCreator = (userID) => (dispatch) => {
     userProfileAPI(userID)
