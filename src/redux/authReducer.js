@@ -29,14 +29,13 @@ export const setAuthUserData = (userID, email, login, isAuth) => {
         payload: {userID, email, login, isAuth}
     }
 }
-export const getAuthUserDataThunkCreator = () => (dispatch) => {
-    return authMeAPI()
-        .then(data => {
-            if (data.resultCode === 0) {
-                let {id, email, login} = data.data;
-                dispatch(setAuthUserData(id, email, login, true));
-            }
-        });
+export const getAuthUserDataThunkCreator = () => async (dispatch) => {
+    let response = await authMeAPI()
+
+    if (response.data.resultCode === 0) {
+        let {id, email, login} = response.data.data;
+        dispatch(setAuthUserData(id, email, login, true));
+    }
 }
 export const loginThunkCreator = (email, password, rememberMe) => (dispatch) => {
     loginAPI(email, password, rememberMe)
