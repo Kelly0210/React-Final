@@ -22,8 +22,8 @@ const LoginPage = (props) => {
     </div>
 }
 
-const LoginForm = (props) => {
-    return <form onSubmit={props.handleSubmit}>
+const LoginForm = ({handleSubmit, error}) => {
+    return <form onSubmit={handleSubmit}>
         <div>
             <Field placeholder={"Email"} component={CustomInput} name={"email"} validate={[requiredField]}/>
         </div>
@@ -34,9 +34,9 @@ const LoginForm = (props) => {
         <div>
             <Field type={"checkbox"} component={CustomInput} name={"rememberMe"}/> remember me
         </div>
-        {props.error &&
+        {error &&
         <div className={style.formSummaryError}>
-            {props.error}
+            {error}
         </div>}
         <div>
             <button>Login</button>

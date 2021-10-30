@@ -29,10 +29,11 @@ export const initializedSuccess = () => {
 }
 export const initializedApp = () => (dispatch) => {
     let promise = dispatch(getAuthUserDataThunkCreator());
-    promise.then(
-        () => {
+    Promise.all([promise])
+        .then(() => {
             dispatch(initializedSuccess());
         })
+
 }
 
 export default appReducer;

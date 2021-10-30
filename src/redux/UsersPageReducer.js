@@ -15,7 +15,7 @@ let initialState = {
     //     {id: 4, fullName: "Irina", status: "I sleep only six hours a day!", isFollowed: false, location: {country: "Russia", city: "Omsk"}},
     //     {id: 5, fullName: "Alan", status: "DO YOU HAVE SLEEP?", isFollowed: false, location: {country: "Russia", city: "Omsk"} },
     // ],
-    usersData: [ ],
+    usersData: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
@@ -48,9 +48,9 @@ const UsersReducer = (state = initialState, action) => {
             }
         case SET_TOTAL_USERS_COUNT:
             return {
-            ...state,
-            totalUsersCount: action.count
-        }
+                ...state,
+                totalUsersCount: action.count
+            }
         case IS_FETCHING:
             return {
                 ...state,
@@ -73,17 +73,14 @@ export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_C
 export const toggleIsFetching = (isFetching) => ({type: IS_FETCHING, isFetching})
 export const followingInProgress = (isFetching) => ({type: FOLLOWING_IN_PROGRESS, isFetching})
 
-export const getUsersThunkCreator = (currentPage, pageSize) => (dispatch) => {
+export const getUsersThunkCreator = (currentPage, pageSize) => async (dispatch) => {
     dispatch(toggleIsFetching(true));
     dispatch(setCurrentPage(currentPage))
 
-    getUsersAPI.getUsers(currentPage, pageSize)
-        .then(data => {
-            dispatch(toggleIsFetching(false));
-            dispatch(setUsers(data.items));
-            dispatch(setTotalUsersCount(data.totalCount));
-        });
+    let response = await getUsersAPI.getUsers(currentPage, pageSize)
+    dispatch(toggleIsFetching(false));
+    dispatch(setUsers(response.data.items));
+    dispatch(setTotalUsersCount(response.data.totalCount));
 }
-
 
 export default UsersReducer;

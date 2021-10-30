@@ -5,7 +5,7 @@ import {
     toggleFollow, followingInProgress, getUsersThunkCreator
 } from "../../redux/UsersPageReducer";
 import Users from "./Users";
-import Preloader from "../Common/preloader";
+import Preloader from "../../common/preloader";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 import {

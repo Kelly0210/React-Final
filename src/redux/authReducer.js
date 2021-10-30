@@ -37,24 +37,23 @@ export const getAuthUserDataThunkCreator = () => async (dispatch) => {
         dispatch(setAuthUserData(id, email, login, true));
     }
 }
-export const loginThunkCreator = (email, password, rememberMe) => (dispatch) => {
-    loginAPI(email, password, rememberMe)
-        .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(getAuthUserDataThunkCreator())
-            } else {
-                let message = data.messages.length > 0 ? data.messages[0] : "Some Error";
-                dispatch(stopSubmit("login", {_error:message}))
-            }
-        });
+export const loginThunkCreator = (email, password, rememberMe) => async (dispatch) => {
+    let response = await loginAPI(email, password, rememberMe)
+
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthUserDataThunkCreator())
+    } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some Error";
+        dispatch(stopSubmit("login", {_error: message}))
+    }
 }
-export const logoutThunkCreator = () => (dispatch) => {
-    logoutAPI()
-        .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setAuthUserData(null, null, null, false))
-            }
-        });
+export const logoutThunkCreator = () => async (dispatch) => {
+    let response = await logoutAPI()
+
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(null, null, null, false))
+    }
+
 }
 
 export default authReducer;

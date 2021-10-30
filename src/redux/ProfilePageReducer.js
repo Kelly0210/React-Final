@@ -51,14 +51,12 @@ export const addPost = (newPostBody) => {
         newPostBody
     }
 };
-
 export const setUserProfile = (profile) => {
     return {
         type: SET_USER_PROFILE,
         profile
     }
 }
-
 export const setProfileStatus = (profileStatus) => {
     return {
         type: SET_USER_STATUS,
@@ -66,7 +64,6 @@ export const setProfileStatus = (profileStatus) => {
 
     }
 }
-
 export const deletePost = (postID) => {
     return {
         type: DELETE_POST,
@@ -74,27 +71,21 @@ export const deletePost = (postID) => {
     }
 };
 
-export const getProfileThunkCreator = (userID) => (dispatch) => {
-    userProfileAPI(userID)
-        .then(data => {
-            dispatch(setUserProfile(data));
-        })
+export const getProfileThunkCreator = (userID) => async (dispatch) => {
+    let response = await userProfileAPI(userID)
+    dispatch(setUserProfile(response.data));
 }
 
-export const getProfileStatusThunkCreator = (userID) => (dispatch) => {
-    getProfileStatusAPI(userID)
-        .then(data => {
-                dispatch(setProfileStatus(data));
-        })
+export const getProfileStatusThunkCreator = (userID) => async (dispatch) => {
+    let response = await getProfileStatusAPI(userID)
+    dispatch(setProfileStatus(response.data));
 }
 
-export const updateProfileStatusThunkCreator = (status) => (dispatch) => {
-    updateProfileStatusAPI(status)
-        .then(data => {
-            if (data.resultCode === 0) {
-                dispatch(setProfileStatus(status));
-            }
-        })
+export const updateProfileStatusThunkCreator = (status) => async (dispatch) => {
+    let response = await updateProfileStatusAPI(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setProfileStatus(status));
+    }
 }
 
 export default ProfilePageReducer;
