@@ -7,9 +7,10 @@ import SidebarContainer from "./Components/Sidebar/SidebarContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import LoginPage from "./Components/Login/Login";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializedApp} from "./redux/AppReducer";
 import Preloader from "./common/preloader";
+import store from "./redux/reduxStore";
 
 class App extends React.Component {
     componentDidMount() {
@@ -21,8 +22,7 @@ class App extends React.Component {
             return <Preloader />
         }
 
-        return <BrowserRouter>
-            <div className="app-wrapper content">
+        return <div className="app-wrapper content">
                 <HeaderContainer/>
                 <SidebarContainer/>
                 <Route path="/dialogs" render={() => <DialogsContainer/>}/>
@@ -30,7 +30,6 @@ class App extends React.Component {
                 <Route path="/users" render={() => <UsersContainer/>}/>
                 <Route path="/login" render={() => <LoginPage/>}/>
             </div>
-        </BrowserRouter>
     }
 }
 
@@ -38,4 +37,16 @@ const mapStateToProps = (state) => ({
     initialized: state.app.initialized
 })
 
-export default connect(mapStateToProps, {initializedApp})(App)
+let AppContainer = connect(mapStateToProps, {initializedApp})(App)
+
+const MainApp = (props) => {
+    return <React.StrictMode>
+        <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </BrowserRouter>
+    </React.StrictMode>
+}
+
+export default MainApp;
