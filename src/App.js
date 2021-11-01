@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import ProfileContainer from "./Components/Profile/ProfileContainer";
-import {BrowserRouter, Route} from "react-router-dom";
+import {HashRouter, Route} from "react-router-dom";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import SidebarContainer from "./Components/Sidebar/SidebarContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
@@ -41,11 +41,11 @@ let AppContainer = connect(mapStateToProps, {initializedApp})(App)
 
 const MainApp = (props) => {
     return <React.StrictMode>
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <HashRouter basename={process.env.PUBLIC_URL}>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     </React.StrictMode>
 }
 
