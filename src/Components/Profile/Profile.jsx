@@ -5,9 +5,11 @@ import MyPosts from "./MyPosts/MyPosts";
 const Profile = (props) => {
 
     return <div>
-        <ProfileInfo profile={props.profile}
+        <ProfileInfo isOwner={props.isOwner}
+                     profile={props.profile}
                      profileStatus={props.profileStatus}
                      updateStatus={props.updateProfileStatusThunkCreator}
+                     savePhoto={props.savePhoto}
                      {...props}/>
         <MyPosts addPost={props.addPost}
                  {...props} />
