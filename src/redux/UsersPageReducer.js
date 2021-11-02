@@ -1,4 +1,4 @@
-import {getUsersAPI} from "../API/API";
+import {UsersAPI} from "../API/API";
 
 const TOGGLE_FOLLOW = "TOGGLE-FOLLOW";
 const SET_USERS = "SET-USERS";
@@ -77,7 +77,7 @@ export const getUsersThunkCreator = (currentPage, pageSize) => async (dispatch) 
     dispatch(toggleIsFetching(true));
     dispatch(setCurrentPage(currentPage))
 
-    let response = await getUsersAPI.getUsers(currentPage, pageSize)
+    let response = await UsersAPI.getUsers(currentPage, pageSize)
     dispatch(toggleIsFetching(false));
     dispatch(setUsers(response.data.items));
     dispatch(setTotalUsersCount(response.data.totalCount));

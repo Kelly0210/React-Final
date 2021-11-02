@@ -1,4 +1,4 @@
-import {authMeAPI, loginAPI, logoutAPI} from "../API/API";
+import {LoginAPI} from "../API/API";
 import {stopSubmit} from "redux-form";
 
 const SET_AUTH_USER_DATA = "SET-AUTH-USER-DATA";
@@ -30,7 +30,7 @@ export const setAuthUserData = (userID, email, login, isAuth) => {
     }
 }
 export const getAuthUserDataThunkCreator = () => async (dispatch) => {
-    let response = await authMeAPI()
+    let response = await LoginAPI.authToServer()
 
     if (response.data.resultCode === 0) {
         let {id, email, login} = response.data.data;
@@ -38,7 +38,7 @@ export const getAuthUserDataThunkCreator = () => async (dispatch) => {
     }
 }
 export const loginThunkCreator = (email, password, rememberMe) => async (dispatch) => {
-    let response = await loginAPI(email, password, rememberMe)
+    let response = await LoginAPI.login(email, password, rememberMe)
 
     if (response.data.resultCode === 0) {
         dispatch(getAuthUserDataThunkCreator())
@@ -48,7 +48,7 @@ export const loginThunkCreator = (email, password, rememberMe) => async (dispatc
     }
 }
 export const logoutThunkCreator = () => async (dispatch) => {
-    let response = await logoutAPI()
+    let response = await LoginAPI.logout()
 
     if (response.data.resultCode === 0) {
         dispatch(setAuthUserData(null, null, null, false))

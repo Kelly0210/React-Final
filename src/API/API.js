@@ -8,47 +8,46 @@ const instance = axios.create({
     }
 })
 
-export const getUsersAPI = {
-    getUsers(currentPage = 1, pageSize = 5) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+export const ProfileAPI = {
+    getProfile(userID) {
+        return instance.get(`profile/${userID}`)
+    },
+    getProfileStatus(userID) {
+        return instance.get(`profile/status/${userID}`)
+    },
+    updateProfileStatus(status) {
+        return instance.put(`profile/status/`, {status})
+    },
+    saveTextProfile(profile) {
+        //Save all info from user. Non include photo or status.
+        return instance.put(`profile/`, profile);
+    },
+    saveAvatar(file) {
+        const formData = new FormData();
+        formData.append("image", file)
+        return instance.put(`profile/photo`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
     }
 }
 
-export const userProfileAPI = (userID) => {
-    return instance.get(`profile/
-    ${userID}`)
+export const UsersAPI = {
+    getUsers(currentPage = 1, pageSize = 5) {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+    },
 }
 
-export const savePhotoAPI = (file) => {
-    const formData = new FormData();
-    formData.append("image", file)
-    return instance.put(`profile/photo`, formData, {
-        headers: {
-            "Content-Type": "multipart/form-data"
-        }
-    })
-};
-
-export const saveProfileAPI = (profile) => {
-    return instance.put(`profile/`, profile);
-}
-
-export const getProfileStatusAPI = (userID) => {
-    return instance.get(`profile/status/${userID}`)
-}
-
-export const updateProfileStatusAPI = (status) => {
-    return instance.put(`profile/status/`, {status})
-}
-
-export const authMeAPI = () => {
-    return instance.get(`/auth/me`)
-}
-
-export const loginAPI = (email, password, rememberMe = false) => {
-    return instance.post(`/auth/login`, {email, password, rememberMe})
-}
-
-export const logoutAPI = () => {
-    return instance.delete(`/auth/login`)
+export const LoginAPI = {
+    login(email, password, rememberMe = false) {
+        return instance.post(`/auth/login`, {email, password, rememberMe})
+    },
+    logout() {
+        return instance.delete(`/auth/login`)
+    },
+    authToServer() {
+        //Send all data from user to server(Samurai)
+        return instance.get(`/auth/me`)
+    }
 }

@@ -1,5 +1,6 @@
-import {userProfileAPI, updateProfileStatusAPI, getProfileStatusAPI, savePhotoAPI, saveProfileAPI} from "../API/API";
+import {ProfileAPI} from "../API/API";
 import {stopSubmit} from "redux-form";
+
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = "SET-USER-PROFILE";
@@ -98,24 +99,24 @@ export const SaveProfileSuccess = (profile) => {
 };
 
 export const getProfileThunkCreator = (userID) => async (dispatch) => {
-    let response = await userProfileAPI(userID)
+    let response = await ProfileAPI.getProfile(userID)
     dispatch(setUserProfile(response.data));
 }
 
 export const getProfileStatusThunkCreator = (userID) => async (dispatch) => {
-    let response = await getProfileStatusAPI(userID)
+    let response = await ProfileAPI.getProfileStatus(userID)
     dispatch(setProfileStatus(response.data));
 }
 
 export const updateProfileStatusThunkCreator = (status) => async (dispatch) => {
-    let response = await updateProfileStatusAPI(status)
+    let response = await ProfileAPI.updateProfileStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setProfileStatus(status));
     }
 }
 
 export const savePhotoThunkCreator = (file) => async (dispatch) => {
-    let response = await savePhotoAPI(file);
+    let response = await ProfileAPI.saveAvatar(file);
 
     if (response.data.resultCode === 0) {
         dispatch(SavePhotoSuccess(response.data.data.photos));
@@ -124,7 +125,7 @@ export const savePhotoThunkCreator = (file) => async (dispatch) => {
 
 export const saveProfileThunkCreator = (profile) => async (dispatch, getState) => {
     const userID = getState().auth.userID;
-    let response = await saveProfileAPI(profile);
+    let response = await ProfileAPI.saveTextProfile(profile);
 
     if (response.data.resultCode === 0) {
         dispatch(getProfileThunkCreator(userID));
