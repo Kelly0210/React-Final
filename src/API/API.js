@@ -29,6 +29,10 @@ export const savePhotoAPI = (file) => {
     })
 };
 
+export const saveProfileAPI = (profile) => {
+    return instance.put(`profile/`, profile);
+}
+
 export const getProfileStatusAPI = (userID) => {
     return instance.get(`profile/status/${userID}`)
 }

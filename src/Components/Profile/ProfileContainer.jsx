@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {
     addPost,
     getProfileStatusThunkCreator,
-    getProfileThunkCreator, savePhotoThunkCreator,
+    getProfileThunkCreator, savePhotoThunkCreator, saveProfileThunkCreator,
     updateProfileStatusThunkCreator
 } from "../../redux/ProfilePageReducer";
 import {withRouter} from "react-router-dom";
@@ -43,7 +43,9 @@ class ProfileContainer extends React.Component {
                         addPost={this.props.addPost}
                         profileStatus={this.props.profileStatus}
                         savePhoto={this.props.savePhotoThunkCreator}
-                        updateStatus={this.props.updateProfileStatusThunkCreator}/>
+                        updateStatus={this.props.updateProfileStatusThunkCreator}
+                        saveProfile={this.props.saveProfileThunkCreator}
+        />
     }
 }
 
@@ -64,6 +66,7 @@ export default compose(
         getProfileStatusThunkCreator,
         updateProfileStatusThunkCreator,
         savePhotoThunkCreator,
+        saveProfileThunkCreator
     }),
     withRouter,
     // withAuthRedirect,
