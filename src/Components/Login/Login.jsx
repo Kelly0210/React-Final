@@ -2,14 +2,14 @@ import React from 'react';
 import {Field, reduxForm} from "redux-form";
 import {CustomInput} from "../../common/formControls";
 import {requiredField} from "../../common/utils/validators/validator";
-import {loginThunkCreator, logoutThunkCreator} from "../../redux/authReducer";
+import {getCaptchaThunkCreator, loginThunkCreator, logoutThunkCreator} from "../../redux/authReducer";
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 import style from "../../common/formControls.module.css"
 
 const LoginPage = (props) => {
     const onSubmit = (formData) => {
-        props.loginThunkCreator(formData.email, formData.password, formData.rememberMe,)
+        props.loginThunkCreator(formData.email, formData.password, formData.rememberMe, formData.captchaForm)
     }
 
     if (props.isAuth) {
@@ -18,11 +18,11 @@ const LoginPage = (props) => {
 
     return <div>
         <h1>Login</h1>
-        <LoginReduxForm onSubmit={onSubmit}/>
+        <LoginReduxForm onSubmit={onSubmit} captcha={props.captcha}/>
     </div>
 }
 
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({handleSubmit, error, ...props}) => {
     return <form onSubmit={handleSubmit}>
         <div>
             <Field placeholder={"Email"} component={CustomInput} name={"email"} validate={[requiredField]}/>
@@ -34,6 +34,10 @@ const LoginForm = ({handleSubmit, error}) => {
         <div>
             <Field type={"checkbox"} component={CustomInput} name={"rememberMe"}/> remember me
         </div>
+
+        {props.captcha && <img src={props.captcha}/>}
+        {props.captcha && <Field placeholder={"Captcha symbols"} component={CustomInput} name={"captchaForm"}
+                                 validate={[requiredField]}/>}
         {error &&
         <div className={style.formSummaryError}>
             {error}
@@ -47,7 +51,8 @@ const LoginForm = ({handleSubmit, error}) => {
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
 
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captcha: state.auth.captcha,
 })
 
-export default connect(mapStateToProps,{loginThunkCreator,logoutThunkCreator})(LoginPage)
+export default connect(mapStateToProps, {loginThunkCreator, logoutThunkCreator, getCaptchaThunkCreator})(LoginPage)

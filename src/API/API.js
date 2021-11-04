@@ -40,8 +40,8 @@ export const UsersAPI = {
 }
 
 export const LoginAPI = {
-    login(email, password, rememberMe = false) {
-        return instance.post(`/auth/login`, {email, password, rememberMe})
+    login(email, password, rememberMe = false, captcha = null) {
+        return instance.post(`/auth/login`, {email, password, rememberMe, captcha})
     },
     logout() {
         return instance.delete(`/auth/login`)
@@ -49,5 +49,11 @@ export const LoginAPI = {
     authToServer() {
         //Send all data from user to server(Samurai)
         return instance.get(`/auth/me`)
+    }
+}
+
+export const SecurityAPI = {
+    getCaptchaURL() {
+        return instance.get(`/security/get-captcha-url`);
     }
 }
