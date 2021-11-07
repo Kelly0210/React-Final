@@ -6,18 +6,28 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import Preloader from "./common/preloader";
 import SidebarContainer from "./Components/Sidebar/SidebarContainer";
-import UsersContainer from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import LoginPage from "./Components/Login/Login";
 // import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 // import ProfileContainer from "./Components/Profile/ProfileContainer";
+// import UsersContainer from "./Components/Users/UsersContainer";
 
 const DialogsContainer = React.lazy(() => import("./Components/Dialogs/DialogsContainer"));
 const ProfileContainer = React.lazy(() => import("./Components/Profile/ProfileContainer"));
+const UsersContainer = React.lazy(() => import("./Components/Users/UsersContainer"));
 
 class App extends React.Component {
+    catchAllUnhandledErrors = (promiseRejectionEvent) => {
+        alert(promiseRejectionEvent);
+    }
+
     componentDidMount() {
         this.props.initializedApp();
+        window.addEventListener("unhandledRejection", this.catchAllUnhandledErrors);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("unhandledRejection", this.catchAllUnhandledErrors);
     }
 
     render() {
@@ -33,6 +43,10 @@ class App extends React.Component {
                 <Route path="/profile/:userID?" render={() => <ProfileContainer/>}/>
                 <Route path="/users" render={() => <UsersContainer/>}/>
                 <Route path="/login" render={() => <LoginPage/>}/>
+                {/*<Footer />*/}
+
+                <Route path="/" exact render={() => <div>404 NOT
+                    FOUND</div>}/> {/* <--Refactor to component with styles and add in common */}
             </div>
         </Suspense>
     }
@@ -45,13 +59,12 @@ const mapStateToProps = (state) => ({
 let AppContainer = connect(mapStateToProps, {initializedApp})(App)
 
 const MainApp = (props) => {
-    return <React.StrictMode>
-        <BrowserRouter>
+    return <BrowserRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
         </BrowserRouter>
-    </React.StrictMode>
+
 }
 
 export default MainApp;

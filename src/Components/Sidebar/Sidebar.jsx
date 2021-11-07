@@ -17,7 +17,7 @@ const BestFriend = (props) => {
 
 const Sidebar = (props) => {
 
-    let bestFriendElement = props.bestFriends.map(friend => <BestFriend name={friend.name} id={friend.id}/>);
+    let bestFriendElement = props.bestFriends.map(friend => <BestFriend key={friend.id} name={friend.name} id={friend.id}/>);
 
     return (
         <nav className={style.nav}>

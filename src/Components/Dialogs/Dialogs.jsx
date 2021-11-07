@@ -18,6 +18,7 @@ const Dialogs = (props) => {
 
     let onSendMessageClick = (values) => {
         props.sendMessage(values.newMessageBody);
+        values.newMessageBody = "";
     }
 
     return <div className={style.dialogs}>

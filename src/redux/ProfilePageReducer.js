@@ -28,12 +28,12 @@ const ProfilePageReducer = (state = initialState, action) => {
             let newPost = action.newPostBody;
             return {
                 ...state,
-                postsData: [...state.postsData, {id: 6, message: newPost, likesCount: 0}]
+                postsData: [...state.postsData, {id: 6, message: newPost, likesCount: 0}],
             }
         case DELETE_POST:
             return {
                 ...state,
-                postsData: state.postsData.filter(post => post.id != action.postID)
+                postsData: state.postsData.filter(post => post.id !== action.postID)
             }
         case SET_USER_PROFILE:
             return {
@@ -92,11 +92,14 @@ export const SavePhotoSuccess = (photos) => {
     }
 };
 export const SaveProfileSuccess = (profile) => {
+    // Optimize(?) profileStatus
     return {
         type: SAVE_PROFILE_SUCCESS,
         profile
     }
 };
+
+
 
 export const getProfileThunkCreator = (userID) => async (dispatch) => {
     let response = await ProfileAPI.getProfile(userID)

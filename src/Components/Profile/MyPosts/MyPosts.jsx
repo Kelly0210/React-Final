@@ -14,6 +14,7 @@ const MyPosts = React.memo(props => {
 
     let addPost = (values) => {
         props.addPost(values.newPostBody);
+        values.newPostBody = "";
     }
 
     return <div className={style.postsBlock}>

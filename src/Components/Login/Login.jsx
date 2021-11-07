@@ -35,7 +35,7 @@ const LoginForm = ({handleSubmit, error, ...props}) => {
             <Field type={"checkbox"} component={CustomInput} name={"rememberMe"}/> remember me
         </div>
 
-        {props.captcha && <img src={props.captcha}/>}
+        {props.captcha && <img src={props.captcha} alt="Captcha should be here"/>}
         {props.captcha && <Field placeholder={"Captcha symbols"} component={CustomInput} name={"captchaForm"}
                                  validate={[requiredField]}/>}
         {error &&

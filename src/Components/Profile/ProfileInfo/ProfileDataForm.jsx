@@ -14,7 +14,7 @@ const ProfileDataForm = ({error, ...props}) => {
         </div>}
         <div>
             <b>FullName:</b> <Field placeholder="Full Name"
-                                    name="fullMame"
+                                    name="fullName"
                                     component={CustomInput}/>
         </div>
         <div>
