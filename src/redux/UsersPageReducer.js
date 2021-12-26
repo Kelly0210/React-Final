@@ -1,11 +1,11 @@
 import {UsersAPI} from "../API/API";
 
-const TOGGLE_FOLLOW = "TOGGLE-FOLLOW";
-const SET_USERS = "SET-USERS";
-const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
-const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
-const IS_FETCHING = "IS-FETCHING";
-const FOLLOWING_IN_PROGRESS = "FOLLOWING_IN_PROGRESS";
+const TOGGLE_FOLLOW = "src/redux/authReducer/TOGGLE-FOLLOW";
+const SET_USERS = "src/redux/authReducer/SET-USERS";
+const SET_CURRENT_PAGE = "src/redux/authReducer/SET-CURRENT-PAGE";
+const SET_TOTAL_USERS_COUNT = "src/redux/authReducer/SET-TOTAL-USERS-COUNT";
+const IS_FETCHING = "src/redux/authReducer/IS-FETCHING";
+const FOLLOWING_IN_PROGRESS = "src/redux/authReducer/FOLLOWING_IN_PROGRESS";
 
 let initialState = {
     // usersData: [

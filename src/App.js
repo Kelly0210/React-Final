@@ -8,6 +8,7 @@ import Preloader from "./common/preloader";
 import SidebarContainer from "./Components/Sidebar/SidebarContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import LoginPage from "./Components/Login/Login";
+import Footer from "./Components/Footer/Footer";
 // import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 // import ProfileContainer from "./Components/Profile/ProfileContainer";
 // import UsersContainer from "./Components/Users/UsersContainer";

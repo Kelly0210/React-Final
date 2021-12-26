@@ -1,8 +1,8 @@
 import {LoginAPI, SecurityAPI} from "../API/API";
 import {stopSubmit} from "redux-form";
 
-const SET_AUTH_USER_DATA = "SET-AUTH-USER-DATA";
-const CAPTCHA_SUCCESSFUL = "CAPTCHA_SUCCESSFUL";
+const SET_AUTH_USER_DATA = "src/redux/authReducer/SET-AUTH-USER-DATA";
+const CAPTCHA_SUCCESSFUL = "src/redux/authReducer/CAPTCHA_SUCCESSFUL";
 
 let initialState = {
     userID: null,

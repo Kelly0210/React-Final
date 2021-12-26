@@ -2,12 +2,12 @@ import {ProfileAPI} from "../API/API";
 import {stopSubmit} from "redux-form";
 
 
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE = "SET-USER-PROFILE";
-const SET_USER_STATUS = "SET_USER_STATUS";
-const DELETE_POST = "DELETE_POST";
-const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
-const SAVE_PROFILE_SUCCESS = "SAVE_PROFILE_SUCCESS";
+const ADD_POST = "src/redux/authReducer/ADD-POST";
+const SET_USER_PROFILE = "src/redux/authReducer/SET-USER-PROFILE";
+const SET_USER_STATUS = "src/redux/authReducer/SET_USER_STATUS";
+const DELETE_POST = "src/redux/authReducer/DELETE_POST";
+const SAVE_PHOTO_SUCCESS = "src/redux/authReducer/SAVE_PHOTO_SUCCESS";
+const SAVE_PROFILE_SUCCESS = "src/redux/authReducer/SAVE_PROFILE_SUCCESS";
 
 
 let initialState = {
