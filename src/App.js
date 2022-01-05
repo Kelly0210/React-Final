@@ -9,6 +9,7 @@ import SidebarContainer from "./Components/Sidebar/SidebarContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import LoginPage from "./Components/Login/Login";
 import Footer from "./Components/Footer/Footer";
+import ErrorBoundary from "./common/ErrorBoundary";
 // import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 // import ProfileContainer from "./Components/Profile/ProfileContainer";
 // import UsersContainer from "./Components/Users/UsersContainer";
@@ -16,6 +17,7 @@ import Footer from "./Components/Footer/Footer";
 const DialogsContainer = React.lazy(() => import("./Components/Dialogs/DialogsContainer"));
 const ProfileContainer = React.lazy(() => import("./Components/Profile/ProfileContainer"));
 const UsersContainer = React.lazy(() => import("./Components/Users/UsersContainer"));
+
 
 class App extends React.Component {
     catchAllUnhandledErrors = (promiseRejectionEvent) => {
@@ -36,7 +38,8 @@ class App extends React.Component {
             return <Preloader/>
         }
 
-        return <Suspense fallback={<div>Loading...</div>}>
+        return <ErrorBoundary>
+        <Suspense fallback={<div>Loading...</div>}>
             <div className="app-wrapper content">
                 <HeaderContainer/>
                 <SidebarContainer/>
@@ -50,6 +53,7 @@ class App extends React.Component {
                     FOUND</div>}/> {/* <--Refactor to component with styles and add in common */}
             </div>
         </Suspense>
+        </ErrorBoundary>
     }
 }
 
